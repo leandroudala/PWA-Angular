@@ -13,8 +13,8 @@
       "sizes": "192x192"
     }
   ],
-  "id": "/?source=pwa",
-  "start_url": "/?source=pwa",
+  "id": "/",
+  "start_url": "/",
   "background_color": "#3367D6",
   "display": "standalone",
   "scope": "/",
@@ -24,7 +24,7 @@
       "name": "Open Today",
       "short_name": "Today",
       "description": "View weather information for today",
-      "url": "/today?source=pwa",
+      "url": "/?source=pwa",
       "icons": [
         {
           "src": "/assets/imgs/android-chrome-192.png",
@@ -36,7 +36,7 @@
       "name": "Open Tomorrow",
       "short_name": "Tomorrow",
       "description": "View weather information for tomorrow",
-      "url": "/tomorrow?source=pwa",
+      "url": "/?source=pwa",
       "icons": [
         {
           "src": "/assets/imgs/android-chrome-192.png",
