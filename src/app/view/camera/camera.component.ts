@@ -70,9 +70,14 @@ export class CameraComponent implements OnInit {
     })
   }
 
-  selectFirstDevice() {
-    console.log("available devices:", this.availableDevices);
-    this.deviceCurrent = this.availableDevices[0];
+  async selectFirstDevice() {
+    const found = await this.scanner.getAnyVideoDevice();
+    console.log("Any Video Device:", found);
+    this.availableDevices = await this.scanner.updateVideoInputDevices();
+
+    if (this.availableDevices.length) {
+      this.deviceCurrent = this.availableDevices[0];
+    }
   }
 
   onCamerasFound(devices: MediaDeviceInfo[]) {
