@@ -11,7 +11,7 @@ export class CameraComponent implements OnInit {
 
   @ViewChild("scanner", {static: false}) scanner: ZXingScannerComponent;
 
-  autostart = false;
+  autostart = true;
 
   deviceCurrent: MediaDeviceInfo;
 
