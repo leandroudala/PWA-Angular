@@ -56,6 +56,15 @@ export class CameraComponent implements OnInit {
 
   }
 
+  listDevices() {
+    this.scanner.updateVideoInputDevices()
+    .then(devices => {
+      devices.forEach(device => {
+        console.log("device", device);
+      })
+    });
+  }
+
   selectFirstDevice() {
     console.log("available devices:", this.availableDevices);
     this.deviceCurrent = this.availableDevices[0];
