@@ -1,0 +1,9 @@
+.brand-logo {
+    display: block;
+    height: 100%;
+    margin-left: .5em;
+}
+
+.brand-logo > img {
+    vertical-align: middle;
+}
