@@ -5,4 +5,16 @@
 <div>
     <button type="button" (click)="startCamera()">Start Camera</button>
 </div>
-<zxing-scanner [autostart]="autostart" [device]="deviceCurrent" (scanSuccess)="onScan($event)" (permissionResponse)="onHasPermission($event)" #scanner (camerasFound)="onCamerasFound($event)" [formats]="allowedFormats"></zxing-scanner>
+
+<div class="camera-preview">
+    <zxing-scanner 
+        [autostart]="autostart"
+        [device]="deviceCurrent"
+        (scanSuccess)="onScan($event)"
+        (permissionResponse)="onHasPermission($event)"
+        #scanner
+        (camerasFound)="onCamerasFound($event)"
+        [formats]="allowedFormats"
+        (torchCompatible)="onTorchCompatible($event)"
+        (deviceChange)="onDeviceChange($event)"></zxing-scanner>
+</div>

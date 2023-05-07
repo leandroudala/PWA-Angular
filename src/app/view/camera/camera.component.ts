@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerComponent } from "@zxing/ngx-scanner";
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-camera',
@@ -9,16 +10,17 @@ import { ZXingScannerComponent } from "@zxing/ngx-scanner";
 })
 export class CameraComponent implements OnInit {
 
-  @ViewChild("scanner", {static: false}) scanner: ZXingScannerComponent;
+  @ViewChild("scanner", { static: false }) scanner: ZXingScannerComponent;
 
-  autostart = true;
+  autostart = false;
 
   deviceCurrent: MediaDeviceInfo;
+
+  torchAvailable$ = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log("Started");
   }
 
   scannedValue = "";
@@ -26,26 +28,32 @@ export class CameraComponent implements OnInit {
   hasDevices = false;
   hasPermission = false;
 
-  async startCamera() {
+  async askForPermission() {
+    this.hasPermission = await this.scanner.askForPermission();
+
     if (!this.hasPermission) {
-      this.hasPermission = await this.scanner.askForPermission();
-      if (!this.hasPermission) {
-        throw Error("No Permission");
-      } else {
-        console.log("Permission granted");
-      }
+      throw Error("No Permission");
+    }
+
+    this.startCamera();
+  }
+
+  startCamera() {
+    if (!this.hasPermission) {
+      this.askForPermission()
+      return;
     }
 
     if (!this.hasDevices) {
       throw Error("No devices.");
     }
-    
+
     if (this.deviceCurrent == null) {
       this.selectFirstDevice();
     } else {
-      this.scanner.restart();
+      this.scanner.scanStart();
     }
-    
+
   }
 
   selectFirstDevice() {
@@ -62,6 +70,10 @@ export class CameraComponent implements OnInit {
 
   }
 
+  onTorchCompatible(isCompatible: boolean): void {
+    this.torchAvailable$.next(isCompatible || false);
+  }
+
   onHasPermission(hasPermission: boolean) {
     this.hasPermission = hasPermission;
   }
@@ -71,6 +83,10 @@ export class CameraComponent implements OnInit {
     this.scanner.scanStop()
   }
 
-  allowedFormats = [ BarcodeFormat.QR_CODE ]
+  onDeviceChange(device: MediaDeviceInfo) {
+    console.log("device change", device);
+  }
+
+  allowedFormats = [BarcodeFormat.QR_CODE]
 
 }
