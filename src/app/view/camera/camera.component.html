@@ -1,2 +1,8 @@
-<p>Allowed format: QR Code</p>
-<zxing-scanner [formats]="allowedFormats"></zxing-scanner>
+<p>
+    Allowed format: QR Code <br>
+    {{scannedValue}}
+</p>
+<div>
+    <button type="button" (click)="startCamera()">Start Camera</button>
+</div>
+<zxing-scanner [autostart]="autostart" [device]="deviceCurrent" (scanSuccess)="onScan($event)" (permissionResponse)="onHasPermission($event)" #scanner (camerasFound)="onCamerasFound($event)" [formats]="allowedFormats"></zxing-scanner>
