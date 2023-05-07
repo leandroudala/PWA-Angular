@@ -43,7 +43,7 @@ export class CameraComponent implements OnInit {
     if (this.deviceCurrent == null) {
       this.selectFirstDevice();
     } else {
-      this.scanner.scanStart();
+      this.scanner.restart();
     }
     
   }
