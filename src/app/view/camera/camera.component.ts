@@ -43,7 +43,7 @@ export class CameraComponent implements OnInit {
       this.askForPermission()
       return;
     }
-
+    console.log("I have permission.")
     if (!this.hasDevices) {
       throw Error("No devices.");
     }
@@ -57,6 +57,7 @@ export class CameraComponent implements OnInit {
   }
 
   selectFirstDevice() {
+    console.log("available devices:", this.availableDevices);
     this.deviceCurrent = this.availableDevices[0];
   }
 
