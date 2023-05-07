@@ -86,6 +86,8 @@ export class CameraComponent implements OnInit {
 
     if (!this.hasDevices) {
       alert("No camera device found");
+    } else {
+      console.log("cameras found", this.availableDevices);
     }
 
   }
