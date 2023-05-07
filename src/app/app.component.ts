@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeFormat } from '@zxing/library';
+import { CameraComponent } from './view/camera/camera.component';
 import * as M from "materialize-css"
 
 @Component({
@@ -13,5 +15,7 @@ export class AppComponent implements OnInit {
       M.Sidenav.init(elems);
     });
   }
+
+  allowedFormats = [ BarcodeFormat.QR_CODE ]
   title = 'pwa_angular';
 }
