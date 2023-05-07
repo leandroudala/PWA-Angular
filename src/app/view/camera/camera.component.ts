@@ -63,6 +63,11 @@ export class CameraComponent implements OnInit {
         console.log("device", device);
       })
     });
+
+    this.scanner.getAnyVideoDevice()
+    .then(device => {
+      console.log("any device:", device);
+    })
   }
 
   selectFirstDevice() {
